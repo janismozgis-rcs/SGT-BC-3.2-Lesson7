@@ -18,7 +18,14 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     const { id } = req.params;
-    res.send(`Get an article with article ID ${id}`);
+    const articles = getAllArticles();
+    const article = articles[id];
+    if (article) {
+        res.json(article);
+        return;
+    }
+
+    res.status(404).json({error: 'Not found'});
 });
 
 router.post('/', (req, res) => {
