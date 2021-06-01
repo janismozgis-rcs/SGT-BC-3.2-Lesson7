@@ -15,11 +15,12 @@ const getFileContents = () => {
 
     return '';
 }
+
 const saveFile = (newContent) => {
     try {
         accessSync(filePath);
 
-        writeFileSync(filePath, newContent);
+        writeFileSync(filePath, JSON.stringify(newContent));
     } catch (err) {
         console.error(err);
     }
@@ -29,11 +30,16 @@ const storeArticle = (data) => {
     // get the data
     const existingData = getFileContents();
 
+    const newArticle = {
+        decription: data.decription || '',
+        name: data.name || '',
+        author: data.author || '',
+    };
     // append to it the new article
-    const newData = existingData.push(data)
+    existingData.push(newArticle);
 
     // save the new data
-    saveFile(newData);
+    saveFile(existingData);
 }
 
 
