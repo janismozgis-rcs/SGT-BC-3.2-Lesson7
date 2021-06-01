@@ -2,8 +2,6 @@ import { readFileSync, writeFileSync, accessSync } from 'fs';
 
 const filePath = `${process.cwd()}/data/articles.json`;
 
-console.log(filePath);
-
 const getFileContents = () => {
     try {
         accessSync(filePath);
@@ -42,5 +40,9 @@ const storeArticle = (data) => {
     saveFile(existingData);
 }
 
+const getAllArticles = () => {
+    return getFileContents();
+}
 
-export { storeArticle };
+
+export { storeArticle, getAllArticles };

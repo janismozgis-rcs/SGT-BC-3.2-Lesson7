@@ -1,6 +1,6 @@
 // import express from 'express';
 import { Router } from 'express';
-import { storeArticle } from '../models/Article.js';
+import { storeArticle, getAllArticles } from '../models/Article.js';
 
 // const router = express.Router();
 const router = Router();
@@ -12,7 +12,8 @@ const router = Router();
 // DELETE  https://bloggy.com/articles/{id}
 
 router.get('/', (req, res) => {
-    res.send('Gets all the articles');
+    const articles = getAllArticles();
+    res.json(articles);
 });
 
 router.get('/:id', (req, res) => {
@@ -21,9 +22,8 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    console.log(req.body);
     storeArticle(req.body);
-    res.send('Create a new article');
+    res.json({success: true});
 });
 
 router.put('/:id', (req, res) => {
