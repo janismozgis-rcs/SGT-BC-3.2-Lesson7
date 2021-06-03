@@ -44,5 +44,22 @@ const getAllArticles = () => {
     return getFileContents();
 }
 
+const getArticleById = (id) => {
+    const articles = getAllArticles();
 
-export { storeArticle, getAllArticles };
+    return articles[id];
+}
+
+const updateArticle = (id, article, newData) => {
+    article.name = newData.name || '';
+    article.description = newData.description || '';
+    article.author = newData.author || '';
+
+    const articles = getAllArticles();
+    articles[id] = article;
+
+    saveFile(articles);
+}
+
+export { storeArticle, getAllArticles, 
+    getArticleById, updateArticle };

@@ -1,6 +1,8 @@
 // import express from 'express';
 import { Router } from 'express';
-import { storeArticle, getAllArticles } from '../models/Article.js';
+import { storeArticle, getAllArticles, 
+    getArticleById, 
+    updateArticle } from '../models/Article.js';
 
 // const router = express.Router();
 const router = Router();
@@ -18,8 +20,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     const { id } = req.params;
-    const articles = getAllArticles();
-    const article = articles[id];
+    const article = getArticleById(id);
     if (article) {
         res.json(article);
         return;
@@ -35,7 +36,15 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
     const { id } = req.params;
-    res.send(`Edit an article with article ID ${id}`);
+    const article = getArticleById(id);
+    if (!article) {
+        res.status(404).json({error: 'Not found'});
+        return;
+    }
+
+    updateArticle(id, article, req.body)
+
+    res.json({success: true});
 });
 
 router.delete('/:id', (req, res) => {
