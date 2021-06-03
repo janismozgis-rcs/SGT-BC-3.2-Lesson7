@@ -61,5 +61,12 @@ const updateArticle = (id, article, newData) => {
     saveFile(articles);
 }
 
+const deleteArticle = (id) => {
+    const articles = getAllArticles();
+    articles.splice(id, 1);
+
+    saveFile(articles);
+}
+
 export { storeArticle, getAllArticles, 
-    getArticleById, updateArticle };
+    getArticleById, updateArticle, deleteArticle };

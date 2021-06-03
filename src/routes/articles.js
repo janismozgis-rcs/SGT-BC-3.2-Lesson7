@@ -2,7 +2,7 @@
 import { Router } from 'express';
 import { storeArticle, getAllArticles, 
     getArticleById, 
-    updateArticle } from '../models/Article.js';
+    updateArticle, deleteArticle } from '../models/Article.js';
 
 // const router = express.Router();
 const router = Router();
@@ -49,7 +49,15 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     const { id } = req.params;
-    res.send(`Delete an article with article ID ${id}`);
+    const article = getArticleById(id);
+    if (!article) {
+        res.status(404).json({error: 'Not found'});
+        return;
+    }
+
+    deleteArticle(id);
+
+    res.json({success: true});
 });
 
 export default router;
