@@ -1,1 +1,6 @@
-[{"description":"foo 1","name":"bar 1","author":"Johhny 1"},{"decription":"","name":"some other name","author":"Tommy"},{"decription":"","name":"some other name again","author":"Kenny"},{"decription":"","name":"some other name again","author":"Kenny"}]
+[
+    {"description":"foo 1","name":"bar 1","author":"Johhny 1"},
+    {"decription":"","name":"some other name","author":"Tommy"},
+    {"decription":"","name":"some other name again","author":"Kenny"},
+    {"decription":"","name":"some other name again","author":"Kenny"}
+]
